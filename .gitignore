@@ -1,3 +1,9 @@
+
+
+data # adding these 3 so that git can track changes in these folders, but you can remove them if you want to ignore the entire folders
+models
+reports 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
