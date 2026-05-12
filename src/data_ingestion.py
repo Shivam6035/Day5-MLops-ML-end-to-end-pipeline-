@@ -95,7 +95,7 @@ def main():
     try:
         params = load_params(params_path='params.yaml')
         test_size = params['data_ingestion']['test_size']
-        # test_size = 0.2
+        test_size = 0.20
         data_path = 'https://raw.githubusercontent.com/Shivam6035/Day5-MLops-ML-end-to-end-pipeline-/refs/heads/main/spam.csv'
         df = load_data(data_url=data_path)
         final_df = preprocess_data(df)
