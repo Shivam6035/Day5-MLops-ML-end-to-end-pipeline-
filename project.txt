@@ -4,9 +4,25 @@ Building Pipeline:
 3> Add data, models, reports directories to .gitignore file  
 4> Now git add, commit, push
 
-data_ingestion.py feature_engineering.py
+
+
 
 Setting up dcv pipeline (without params means parameters) 
 Create dvc.yaml file and add stages to it. 
 dvc init then do dvc repro to test the pipeline automation. (check "dvc dag" -- to show the entire pipeline) 
+Now git add, commit, push
+
+Do all step again for dvc with params , 
+       add a new param file named "params.yaml" & for testing again change the parameters value in file.
+       then add, commit, push
+
+
+Expermients with DVC:
+
+pip install dvclive
+Add the dvclive code block (mentioned below)
+Do "dvc exp run", it will create a new dvc.yaml(if already not there) and dvclive directory (each run will be considered as an experiment by DVC)
+Do "dvc exp show" on terminal to see the experiments or use extension on VSCode (install dvc extension)
+Do "dvc exp remove {exp-name}" to remove exp (optional) | "dvc exp apply {exp-name}" to reproduce prev exp
+Change params, re-run code (produce new experiments)
 Now git add, commit, push
