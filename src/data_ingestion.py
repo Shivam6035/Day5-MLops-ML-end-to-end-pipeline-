@@ -31,13 +31,13 @@ logger.addHandler(file_handler)
 
 # data loading and preprocessing functions
 
-def load_params(params_path: str) -> dict:
+def load_params(params_path: str) -> dict: # this is with parameters path as input and output is dictionary
     """Load parameters from a YAML file."""
     try:
-        with open(params_path, 'r') as file:
+        with open(params_path, 'r') as file: # opening the yaml file in read mode
             params = yaml.safe_load(file)
-        logger.debug('Parameters retrieved from %s', params_path)
-        return params
+        logger.debug('Parameters retrieved from %s', params_path) # log fun for log info
+        return params 
     except FileNotFoundError:
         logger.error('File not found: %s', params_path)
         raise
@@ -47,7 +47,8 @@ def load_params(params_path: str) -> dict:
     except Exception as e:
         logger.error('Unexpected error: %s', e)
         raise
-
+#
+# data loading function with error handling and logging
 def load_data(data_url: str) -> pd.DataFrame:
     """Load data from a CSV file."""
     try:
@@ -94,8 +95,8 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 def main():
     try:
         params = load_params(params_path='params.yaml')
-        test_size = params['data_ingestion']['test_size']
-        test_size = 0.20
+        test_size = params['data_ingestion']['test_size'] # we can access the test size from the params dictionary using the keys 'data_ingestion' and 'test_size'
+        #test_size = 0.20
         data_path = 'https://raw.githubusercontent.com/Shivam6035/Day5-MLops-ML-end-to-end-pipeline-/refs/heads/main/spam.csv'
         df = load_data(data_url=data_path)
         final_df = preprocess_data(df)

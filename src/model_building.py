@@ -25,10 +25,12 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 console_handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
-logger.addHandler(console_handler)
+# logging handlers added to the logger
+
+logger.addHandler(console_handler)  
 logger.addHandler(file_handler)
 
-def load_params(params_path: str) -> dict:
+def load_params(params_path: str) -> dict: # parameters path as input and output is dictionary
     """Load parameters from a YAML file."""
     try:
         with open(params_path, 'r') as file:
@@ -60,10 +62,10 @@ def load_data(file_path: str) -> tuple:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
-def train_model(X_train, y_train, max_iter: int = 1000):
+def train_model(X_train, y_train, random_state: int = 42):
     """Train a logistic regression model."""
     try:
-        model = LogisticRegression(max_iter=max_iter, random_state=42)
+        model = LogisticRegression(max_iter=1000, random_state=random_state)
         model.fit(X_train, y_train)
         logger.debug('Model trained successfully')
         return model
@@ -110,14 +112,14 @@ def save_model(model, file_path: str) -> None:
 def main():
     try:
         params = load_params(params_path='params.yaml')
-        max_iter = params['model_training']['max_iter']
+        random_state = params['model_building']['random_state']
         
         # Load data
         X_train, y_train = load_data('./data/processed/train_tfidf.csv')
         X_test, y_test = load_data('./data/processed/test_tfidf.csv')
         
         # Train model
-        model = train_model(X_train, y_train, max_iter=max_iter)
+        model = train_model(X_train, y_train, random_state=random_state)
         
         # Evaluate model
         metrics = evaluate_model(model, X_test, y_test)
